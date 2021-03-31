@@ -1,0 +1,53 @@
+﻿<Page x:Class="UI.OrdersView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:UI"
+      mc:Ignorable="d"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
+      Title="Orders">
+
+    <StackPanel>
+        <Label Content="Order Headers"
+               Style="{StaticResource HeaderLabel}" />
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      Margin="0,10,0,0"
+                      HorizontalAlignment="Center">
+            <DataGrid x:Name="dgOrders"
+                      AutoGenerateColumns="False"
+                      Width="500"
+                      Height="300">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id"
+                                        Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="DateTime"
+                                        Binding="{Binding DateTime}" />
+                    <DataGridTextColumn Header="Line Items"
+                                        Binding="{Binding OrderItems.Count}"
+                                        ElementStyle="{StaticResource rightAlignedColumn}" />
+                    <DataGridTextColumn Header="Total"
+                                        Binding="{Binding Total, StringFormat='{}{0:c}'}" Width="80"
+                                        ElementStyle="{StaticResource rightAlignedColumn}" />
+                    <DataGridTextColumn Header="OrderState"
+                                        Binding="{Binding State.State}" />
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Details"
+                                        Click="GoTo_OrderDetails" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+        <Button Content="Add Order"
+                Name="btnAddOrder"
+                Click="btnAddOrder_Click"
+                Width="120"
+                Height="50"
+                Margin="0,20,0,0"></Button>
+    </StackPanel>
+</Page>

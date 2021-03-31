@@ -1,0 +1,76 @@
+﻿<Page x:Class="UI.AddOrderItemView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:UI"
+      mc:Ignorable="d"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
+      Title="AddOrderItem">
+
+    <StackPanel>
+        <Label Content="Add Order Items"
+               FontSize="20"
+               FontWeight="Bold"
+               HorizontalAlignment="Center" />
+        <Grid Width="500"
+              Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.ColumnSpan="3"
+                       Grid.Row="0"
+                       Text="Enter quantity, select a row, and click Add Quantity button." />
+            <Label Grid.Column="0"
+                   Grid.Row="1"
+                   Content="Quantity: "
+                   Style="{StaticResource FormLabel}"
+                   Margin="0,5,0,0" />
+            <TextBox Grid.Column="1"
+                     Grid.Row="1"
+                     x:Name="QuantityInput"
+                     FontSize="15"
+                     Margin="0,5,0,0"
+                     VerticalAlignment="Center" />
+            <Button Grid.Column="2"
+                    Grid.Row="1"
+                    x:Name="AddQuantity"
+                    Content="Add Quantity"
+                    Click="btn_AddQuantity" Width="80" />
+
+            <DataGrid Grid.ColumnSpan="3"
+                      Grid.Row="2"
+                      x:Name="dgStockItems"
+                      AutoGenerateColumns="False"
+                      Margin="0,10,0,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="SKU"
+                                        Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="Name"
+                                        Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Price"
+                                        Binding="{Binding Price, StringFormat='{}{0:c}'}"
+                                        ElementStyle="{StaticResource rightAlignedColumn}"
+                                        Width="60" />
+                    <DataGridTextColumn Header="InStock"
+                                        Binding="{Binding InStock}"
+                                        ElementStyle="{StaticResource rightAlignedColumn}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <!--<Button Content="Check Order Detail"
+                x:Name="GoToAddOrderItem"
+                Click="GoTo_AddOrderItem"
+                Width="120"
+                Height="50"
+                Margin="0,5"></Button>-->
+    </StackPanel>
+</Page>

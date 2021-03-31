@@ -1,0 +1,126 @@
+﻿<Page x:Class="UI.AddOrderView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:UI"
+      mc:Ignorable="d"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
+      Title="AddOrder">
+
+    <StackPanel>
+        <Label Content="Add Order"
+               Style="{StaticResource HeaderLabel}" />
+        <Grid Width="500"
+              Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0"
+                   Grid.Row="0"
+                   Content="Id:"
+                   Style="{StaticResource FormLabel}" />
+            <Label Grid.Column="1"
+                   Grid.Row="0"
+                   Content="{Binding Id}"
+                   Style="{StaticResource FormLabel}"
+                   HorizontalAlignment="Left" />
+            <Label Grid.Column="3"
+                   Grid.Row="0"
+                   Content="OrderState:"
+                   Style="{StaticResource FormLabel}" />
+            <Label Grid.Column="4"
+                   Grid.Row="0"
+                   Content="{Binding State.State}"
+                   Style="{StaticResource FormLabel}"
+                   HorizontalAlignment="Left" />
+            <Label Grid.Column="0"
+                   Grid.Row="1"
+                   Content="DateTime:"
+                   Style="{StaticResource FormLabel}" />
+            <Label Grid.Column="1"
+                   Grid.ColumnSpan="2"
+                   Grid.Row="1"
+                   Content="{Binding DateTime}"
+                   Style="{StaticResource FormLabel}"
+                   HorizontalAlignment="Left" />
+            <Label Grid.Column="3"
+                   Grid.Row="1"
+                   Content="Total:"
+                   Style="{StaticResource FormLabel}" />
+            <Label Grid.Column="4"
+                   Grid.Row="1"
+                   Content="{Binding Total}"
+                   ContentStringFormat="C"
+                   Style="{StaticResource FormLabel}"
+                   HorizontalAlignment="Left" />
+            <ScrollViewer Grid.Row="2"
+                          Grid.ColumnSpan="5"
+                          Margin="0,10,0,0"
+                          HorizontalAlignment="Center">
+                <DataGrid x:Name="dgOrderItems"
+                          ItemsSource="{Binding OrderItems}"
+                          CanUserDeleteRows="True"
+                          AutoGenerateColumns="False"
+                          HorizontalAlignment="Center"
+                          Height="250" Width="480">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="OrderHeaderId"
+                                            Binding="{Binding OrderHeaderId}" />
+                        <DataGridTextColumn Header="SKU"
+                                            Binding="{Binding StockItemId}" />
+                        <DataGridTextColumn Header="Description"
+                                            Binding="{Binding Description}" />
+                        <DataGridTextColumn Header="Price"
+                                            Binding="{Binding Price, StringFormat='{}{0:c}'}"
+                                            ElementStyle="{StaticResource rightAlignedColumn}"
+                                            Width="70" />
+                        <DataGridTextColumn Header="Quantity"
+                                            Binding="{Binding Quantity}"
+                                            ElementStyle="{StaticResource rightAlignedColumn}" />
+                        <DataGridTextColumn Header="Total"
+                                            Binding="{Binding Total, StringFormat='{}{0:c}'}" Width="80"
+                                            ElementStyle="{StaticResource rightAlignedColumn}" />
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Delete"
+                                            x:Name="DeleteOrderItem"
+                                            Click="btn_DeleteOrderItem" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
+            <Button Grid.Column="1"
+                    Grid.Row="3"
+                    Content="Select Items"
+                    Click="GoTo_AddOrderItems"
+                    Height="40"
+                    Margin="0,5" />
+            <Button Grid.Column="2"
+                    Grid.Row="3"
+                    Content="Cancel Order"
+                    Click="btn_CancelOrder"
+                    Height="40"
+                    Margin="0,5" />
+            <Button Grid.Column="3"
+                    Grid.Row="3"
+                    Content="Submit Order"
+                    Click="btn_SubmitOrder"
+                    Height="40" />
+        </Grid>
+    </StackPanel>
+</Page>
